@@ -1,0 +1,56 @@
+Title: First Linux VM + Nmap Scan
+Date: Aug 27, 2025
+
+What I Did:
+
+ • Installed Ubuntu in VirtualBox (2 CPU, 4GB (4096MB) RAM, 30GB disk (Dynamic))
+
+     https://www.virtualbox.org
+
+• Downloaded Linux ISO (Ubuntu)
+
+     https://ubuntu.com/downloa/desktop
+     Set up username 
+     Set up password
+
+• Installed Nmap 
+
+    sudo apt update
+    sudo apt install nmap wireshark
+
+• Scanned my own VM
+
+   Opened a terminal
+   entered: ip addr
+   Installed Nmap on main computer (Windows):  https://nmap.org/download.html
+
+   Ran: nmap 127.0.0.1
+
+• Installed DVWA inside VM
+
+   sudo apt update
+   sudo apt install docker.io
+
+   sudo docker run -it -p 8080:80 vulnerables/web-dvwa
+
+  Opened browser in VM
+
+    http://localhost:8080
+    Automatic login: admin/password
+    Created new database
+
+What Happened:
+
+• Output for Nmap scan showed 2 open ports (631/ipp, 8080/http-proxy) as well as 998 closed tcp ports. I did not at first fully understand all the results yet, but I learned that the Nmap shows which "doors" are open on a machine. 
+
+I also learned that Port 631 is the Internet Printing Protocol. I didn't know that was even running by default. Next, I'll try a version scan with nmap -sV to learn more about what's behind that port. I further learned that Port 8080/http-proxy is commonly used for web servers or proxies and was almost certainly from when I started up DVWA inside Docker.
+
+• Nmap scan report showed: Host is up (0.000057s latency). I learned that means my VM is alive and responding on the network and that's how fast the machine responded.
+
+Next Step:
+
+• Try scanning ]nmap-sV to run a version scan and see service versions and research what that means. 
+• Try scanning nmap -p- <IP> to run a full port scan and research what that means.
+• Look up vulnerabilities and document once I know the versions.
+• Try a new section on DVWA (ie. SQL Injection, XSS or Brute Force) possibly with a beginner walkthrough
+
