@@ -1,56 +1,72 @@
-Title: First Linux VM + Nmap Scan
-Date: Aug 27, 2025
+<h1>Title: First Linux VM + Nmap Scan</h1><br>
+<h2>Date: Aug 27, 2025</h2><br>
 
-What I Did:
+<br><h3>What I Did:</h3><br>
 
- • Installed Ubuntu in VirtualBox (2 CPU, 4GB (4096MB) RAM, 30GB disk (Dynamic))
+<br> • Installed Ubuntu in VirtualBox (2 CPU, 4GB (4096MB) RAM, 30GB disk (Dynamic))<br>
 
-     https://www.virtualbox.org
+    <br><p>https://www.virtualbox.org</p><br>
 
-• Downloaded Linux ISO (Ubuntu)
+<br>• Downloaded Linux ISO (Ubuntu)<br>
+     <ul>
+      <li>https://ubuntu.com/download/desktop</li>
+      <li>Set up username</li>
+      <li>Set up password</li>
+     </ul>
+<br>
 
-     https://ubuntu.com/downloa/desktop
-     Set up username 
-     Set up password
+• Installed Nmap<br>
 
-• Installed Nmap 
+    <ul>
+     <li>sudo apt update</li>
+     <li>sudo apt install nmap wireshark</li>
+    </ul><br>
+    
+• Scanned my own VM<br>
 
-    sudo apt update
-    sudo apt install nmap wireshark
+  <ul>
+   <li>Opened a terminal</li>
+   <li>entered: ip addr</li>
+   <li>Installed Nmap on main computer (Windows):  https://nmap.org/download.html
+</li><br>
+   <li>Ran: <pre><code></code>nmap 127.0.0.1</pre>
+</li>
+  </ul><br>
+   
+  
+• Installed DVWA inside VM<br>
 
-• Scanned my own VM
+<ul>
+ <li> sudo apt update</li>
 
-   Opened a terminal
-   entered: ip addr
-   Installed Nmap on main computer (Windows):  https://nmap.org/download.html
+  
+   <li>sudo apt install docker.io</li>
 
-   Ran: nmap 127.0.0.1
+   <li><pre><code>sudo docker run -it -p 8080:80 vulnerables/web-dvwa</code></pre></li>
 
-• Installed DVWA inside VM
+    <li>Opened browser in VM</li>
+</ul>
 
-   sudo apt update
-   sudo apt install docker.io
+<ul>
+ <li>http://localhost:8080</li>
+ <li>Automatic login: admin/password</li>
+ <li>Created new database</li>
+</ul>
+    
+    
+<br>What Happened:<br>
 
-   sudo docker run -it -p 8080:80 vulnerables/web-dvwa
+<p>• Output for Nmap scan showed 2 open ports (631/ipp, 8080/http-proxy) as well as 998 closed tcp ports. I did not at first fully understand all the results yet, but I learned that the Nmap shows which "doors" are open on a machine.</p> 
 
-  Opened browser in VM
+<p>I also learned that Port 631 is the Internet Printing Protocol. I didn't know that was even running by default. Next, I'll try a version scan with nmap -sV to learn more about what's behind that port. I further learned that Port 8080/http-proxy is commonly used for web servers or proxies and was almost certainly from when I started up DVWA inside Docker.
+</p><br>
+<p>• Nmap scan report showed: Host is up (0.000057s latency). I learned that means my VM is alive and responding on the network and that's how fast the machine responded.
+</p><br>
+<br>Next Step:<br>
 
-    http://localhost:8080
-    Automatic login: admin/password
-    Created new database
-
-What Happened:
-
-• Output for Nmap scan showed 2 open ports (631/ipp, 8080/http-proxy) as well as 998 closed tcp ports. I did not at first fully understand all the results yet, but I learned that the Nmap shows which "doors" are open on a machine. 
-
-I also learned that Port 631 is the Internet Printing Protocol. I didn't know that was even running by default. Next, I'll try a version scan with nmap -sV to learn more about what's behind that port. I further learned that Port 8080/http-proxy is commonly used for web servers or proxies and was almost certainly from when I started up DVWA inside Docker.
-
-• Nmap scan report showed: Host is up (0.000057s latency). I learned that means my VM is alive and responding on the network and that's how fast the machine responded.
-
-Next Step:
-
-• Try scanning ]nmap-sV to run a version scan and see service versions and research what that means. 
-• Try scanning nmap -p- <IP> to run a full port scan and research what that means.
-• Look up vulnerabilities and document once I know the versions.
+• Try scanning ]nmap-sV to run a version scan and see service versions and research what that means. <br>
+• Try scanning nmap -p- <IP> to run a full port scan and research what that means.<br>
+• Look up vulnerabilities and document once I know the versions.<br>
 • Try a new section on DVWA (ie. SQL Injection, XSS or Brute Force) possibly with a beginner walkthrough
+
 
